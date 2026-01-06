@@ -1,0 +1,62 @@
+#### tools
+[dirb](https://github.com/v0re/dirb)
+[]()
+[]()
+
+
+# Step - 1 Found IP machine
+
+As part of the Boot2Root, we were required to identify the IP address of the target virtual machine without any direct access to it. The discovery had to be performed exclusively from the host machine.
+
+### Network Configuration
+
+The virtual machine was configured using Host-only networking in VirtualBox, with the vboxnet0 interface.
+This setup allows communication between the host and the VM while keeping the target isolated from the external network.
+
+###  Methodology
+
+After verifying that the Host-only network was properly configured on the host, we performed a network discovery scan to identify active hosts on the subnet:
+
+```bash
+nmap -sn 192.168.56.0/24
+```
+
+The scan revealed two active hosts:
+
+```bash
+$ sben-tay% nmap -sn 192.168.56.0/24
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2026-01-06 11:51 CET
+Nmap scan report for f4r1s16.clusters.42paris.fr (192.168.56.1) # Host42
+Host is up (0.00014s latency).
+Nmap scan report for 192.168.56.101 # IP VM
+Host is up (0.0013s latency).
+Nmap done: 256 IP addresses (2 hosts up) scanned in 2.91 seconds
+```
+### Conclusion
+
+We successfully identified the IP address of the Boot2Root virtual machine without internal access, using only host-based network reconnaissance.
+
+Target VM IP address:
+
+``192.168.56.101``
+
+
+```
+
+$ sben-tay% nmap 192.168.56.101
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2026-01-06 11:53 CET
+Nmap scan report for 192.168.56.101
+Host is up (0.00015s latency).
+Not shown: 994 closed ports
+
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+80/tcp  open  http
+143/tcp open  imap
+443/tcp open  https
+993/tcp open  imaps
+```
+
