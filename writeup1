@@ -1,8 +1,15 @@
 #### tools
-[dirb](https://github.com/v0re/dirb)
-[]()
-[]()
 
+found all path web with [dirb](https://github.com/v0re/dirb)
+
+```
+ ------------------
+|    CLI UTILS     |
+ ------------------
+
+1. nmap -sn <IP_NETWORK_TARGET> # list all host up in network
+2. nmap <IP_TARGET> # found all services in the host network targets
+```
 
 # Step - 1 Found IP machine
 
