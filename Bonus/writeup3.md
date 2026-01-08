@@ -66,6 +66,6 @@ Essayons de nous connecter
 
 ![alt text](../images/Dirty_congratulation.png)
 
-Congratulation you're root !
+**Congratulation you're root !**
 
 # END

@@ -20,3 +20,7 @@ We then instruct the system to launch the first process directly as **bash**, be
 ```init=/bin/bash```
 
 ![alt text](../images/root_grub.png)
+
+**Congratulation you're root !**
+
+# END
