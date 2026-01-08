@@ -8,7 +8,10 @@
 **Prepared By:** sben-tay's group
 
 ---
-# Root via GRUB – Writeup 4
+
+## Enumeration
+
+### Root via GRUB – Writeup 4
 
 At system startup, if you keep **SHIFT** pressed, you will reach the GRUB menu. **GRUB** is the system that runs before any services are started, such as password authentication.
 ![alt text](../images/grub.png)
