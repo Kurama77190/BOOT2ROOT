@@ -7,6 +7,7 @@
 **name:** writeup1
 **Date:** 6th January 2026  
 **Prepared By:** sben-tay's group
+**exploit:** ret2ret - nop-slide
 
 ---
 

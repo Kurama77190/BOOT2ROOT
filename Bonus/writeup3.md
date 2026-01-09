@@ -9,6 +9,7 @@
 **Prepared By:** sben-tay's group
 **Target identified:** 192.168.56.101
 **source:** https://dirtycow.ninja/
+**exploit:** Dirty-CoW
 
 ![alt text](../images/Dirty_logo.png)
 

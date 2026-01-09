@@ -8,6 +8,7 @@
 **Date:** 6th January 2026  
 **Prepared By:** sben-tay's group
 **Target identified:** 192.168.56.101
+**exploit:** Ret2libc
 
 ---
 
@@ -55,9 +56,9 @@ process 2020
 Mapped address spaces:
 
 	Start Addr   End Addr       Size     Offset objfile
-	 0x8048000  0x8049000     0x1000        0x0 /home/users/level04/level04
-	 0x8049000  0x804a000     0x1000        0x0 /home/users/level04/level04
-	 0x804a000  0x804b000     0x1000     0x1000 /home/users/level04/level04
+	 0x8048000  0x8049000     0x1000        0x0 /home/users/zaz/zaz
+	 0x8049000  0x804a000     0x1000        0x0 /home/users/zaz/zaz
+	 0x804a000  0x804b000     0x1000     0x1000 /home/users/zaz/zaz
 	0xf7e2b000 0xf7e2c000     0x1000        0x0 
 	0xf7e2c000 0xf7fcc000   0x1a0000        0x0 /lib32/libc-2.15.so
 	0xf7fcc000 0xf7fcd000     0x1000   0x1a0000 /lib32/libc-2.15.so
